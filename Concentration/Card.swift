@@ -8,13 +8,22 @@
 
 import Foundation
 
-struct Card
+struct Card: Hashable
 {
+    var hashValue: Int { return identifier}
+    
+ //   func hashVal(into hasher: inout Hasher) {
+   //     hasher = identifier
+  //  }
+    static func ==(lhs: Card, rhs: Card) -> Bool{ // Einführung von == 
+        return lhs.identifier == rhs.identifier
+    }
     //No inherit
     // Value Types, they are getting copied
     var isFaceUp = false
     var isMatched = false
-    let identifier: Int
+    private var identifier: Int
+    var cardString: String!
     
     static var identifierFactory = 0
     
@@ -25,5 +34,6 @@ struct Card
     
     init(){
         self.identifier = Card.getUniqueIdentifier()
+        self.cardString = ""
     }
 }
